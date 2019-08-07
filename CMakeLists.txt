@@ -10,13 +10,13 @@ set(APRILTAG_SRCS apriltag.c apriltag_pose.c apriltag_quad_thresh.c)
 set(CMAKE_BUILD_TYPE Release)
 
 # Library
-file(GLOB TAG_FILES ${CMAKE_SOURCE_DIR}/tag*.c)
+file(GLOB TAG_FILES ${PROJECT_SOURCE_DIR}/tag*.c)
 set_source_files_properties(SOURCE ${TAG_FILES} PROPERTIES COMPILE_FLAGS -O0)
 add_library(${PROJECT_NAME} SHARED ${APRILTAG_SRCS} ${COMMON_SRC} ${TAG_FILES})
 if (MSVC)
     # FindThreads will not find pthread.h with MSVC so we use pthreads-win
     # winmm is necessary for __imp_timeGetTime
-    set(PTHREADS_WIN ${CMAKE_SOURCE_DIR}/thirdparty/pthreads-win)
+    set(PTHREADS_WIN ${PROJECT_SOURCE_DIR}/thirdparty/pthreads-win)
     include_directories(${PTHREADS_WIN}/include)
     add_definitions(-DHAVE_STRUCT_TIMESPEC)
     target_link_libraries(${PROJECT_NAME} ${PTHREADS_WIN}/lib/x64/pthreadVC2.lib winmm)
