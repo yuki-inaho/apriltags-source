@@ -39,6 +39,7 @@ either expressed or implied, of the Regents of The University of Michigan.
 
 #include "apriltag.h"
 #include "tag36h11.h"
+#include "tag36h11_kalibr.h"
 #include "tag25h9.h"
 #include "tag16h5.h"
 #include "tagCircle21h7.h"
@@ -84,6 +85,8 @@ int main(int argc, char *argv[])
     const char *famname = getopt_get_string(getopt, "family");
     if (!strcmp(famname, "tag36h11")) {
         tf = tag36h11_create();
+    } else if (!strcmp(famname, "tag36h11_kalibr")) {
+        tf = tag36h11_kalibr_create();
     } else if (!strcmp(famname, "tag25h9")) {
         tf = tag25h9_create();
     } else if (!strcmp(famname, "tag16h5")) {
@@ -246,6 +249,8 @@ int main(int argc, char *argv[])
 
     if (!strcmp(famname, "tag36h11")) {
         tag36h11_destroy(tf);
+    } else if (!strcmp(famname, "tag36h11_kalibr")) {
+        tag36h11_kalibr_destroy(tf);
     } else if (!strcmp(famname, "tag25h9")) {
         tag25h9_destroy(tf);
     } else if (!strcmp(famname, "tag16h5")) {
